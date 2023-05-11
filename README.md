@@ -2,17 +2,13 @@
     <img title="Flutterwave" height="200" src="https://flutterwave.com/images/logo/full.svg" width="50%"/>
 </p>
 
-# Flutterwave v3 React Library
-![Publish React Package](https://github.com/Flutterwave/Flutterwave-React-v3/workflows/Publish%20React%20Package/badge.svg)
-![npm](https://img.shields.io/npm/v/flutterwave-react-v3)
-![npm](https://img.shields.io/npm/dt/flutterwave-react-v3)
-![NPM](https://img.shields.io/npm/l/flutterwave-react-v3)
+# Flutterwave v3 Nixix Library
 
 
 
 ## Introduction
 
-The React SDK helps you create seamless payment experiences in your React mobile or web app. By connecting to our modal, you can start collecting payment in no time.
+The Nixix SDK helps you create seamless payment experiences in your Nixix mobile or web app. By connecting to our modal, you can start collecting payment in no time.
 
 Available features include:
 
@@ -38,7 +34,7 @@ Available features include:
 
 1. Flutterwave version 3 API keys
 2. Node version >= 6.9.x and npm >= 3.x.x
-3. React version  >= 14
+3. Nixix version  >= 1.3.0
 
 
 ## Installation
@@ -46,20 +42,20 @@ Available features include:
 Install the SDK
 
 ```bash
-$ npm install flutterwave-nixix-v3-sdk
+$ npm install flutterwave-nixix-v3
 
 # or
-$ yarn add flutterwave-nixix-v3-sdk
+$ yarn add flutterwave-nixix-v3
 
 ```
 
 
 ## Initialization
 
-Import useFlutterwave to any component in your application and pass your config
+Import callFlutterwave to any component in your application and pass your config
 
 ```javascript
-import { callFlutterwave } from 'flutterwave-nixix-v3-sdk';
+import { callFlutterwave } from 'flutterwave-nixix-v3';
  const config = {
     public_key: 'FLWPUBK-**************************-X',
     tx_ref: Date.now(),
@@ -85,7 +81,7 @@ import { callFlutterwave } from 'flutterwave-nixix-v3-sdk';
 
 ## Usage
 
-Add Flutterwave to your projects as a component or a react hook:
+Add Flutterwave to your projects as a component or a nixix api:
 
 1. [As a Component](#components)
 2. [Directly in your code](#hooks)
@@ -95,7 +91,7 @@ Add Flutterwave to your projects as a component or a react hook:
 ### Components
 
 ```javascript
-import { FlutterWaveButton, closePaymentModal } from 'flutterwave-nixix-v3-sdk';
+import { FlutterWaveButton, closePaymentModal } from 'flutterwave-nixix-v3';
 
 export default function App() {
    const config = {
@@ -139,7 +135,7 @@ export default function App() {
 ### Hooks
 
 ```javascript
-import { callFlutterwave, closePaymentModal } from 'flutterwave-nixix-v3-sdk';
+import { callFlutterwave, closePaymentModal } from 'flutterwave-nixix-v3';
 
 export default function App() {
   const config = {
@@ -167,7 +163,7 @@ export default function App() {
      <h1>Hello Test user</h1>
 
       <button
-        onClick={() => {
+        on:click={() => {
           handleFlutterPayment({
             callback: (response) => {
                console.log(response);
@@ -190,7 +186,7 @@ Pass the payment plan ID into your payload to make [recurring payments](https://
 
 
 ```javascript
-import { callFlutterwave, closePaymentModal } from 'flutterwave-nixix-v3-sdk';
+import { callFlutterwave, closePaymentModal } from 'flutterwave-nixix-v3';
 
 export default function App() {
   const config = {
@@ -220,7 +216,7 @@ export default function App() {
      <h1>Hello Test user</h1>
 
       <button
-        onClick={() => {
+        on:click={() => {
           handleFlutterPayment({
             callback: (response) => {
                console.log(response);
