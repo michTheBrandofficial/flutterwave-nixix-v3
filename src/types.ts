@@ -11,7 +11,7 @@
   /**
    * currency to charge in. Defaults to NGN
    */
-  currency?: 'NGN' | string;
+  currency?: string | 'NGN';
   /**
    * 	This is a sha256 hash of your FlutterwaveCheckout values, it is used for passing secured values to the payment gateway.
    */
@@ -19,7 +19,7 @@
   /**
    * This specifies the payment options to be displayed e.g - [card, mobilemoney, ussd] and so on. Defaults to 'card, ussd, mobilemoney'
    */
-  payment_options: 'card, ussd, mobilemoney' | string;
+  payment_options: 'card,ussd,mobilemoney' | string;
   /**
    *	This is the payment plan ID used for Recurring billing
    */
