@@ -1,47 +1,49 @@
-import { FlutterWaveButton, closePaymentModal } from '../../src/index';
-import { type InitializeFlutterwavePayment, type FlutterwaveConfig } from '../../src/types';
+import { callFlutterwave } from '../../dist/index';
+import { type InitializeFlutterwavePayment, type FlutterwaveConfig } from '../../dist/types';
 
+/*
+  
+  Please add this script to the head element in your index.html:
+  <script defer src="https://checkout.flutterwave.com/v3.js"></script>
+
+*/
+
+const config: FlutterwaveConfig & InitializeFlutterwavePayment = {
+  public_key: "FLWPUBK_TEST-************************-X",
+  tx_ref: Date.now().toString(), //  can be a random lengthy string.
+  amount: 100,
+  currency: 'NGN', // can be 'USD' or any other currency
+  payment_options: 'card,ussd',
+  customer: {
+    email: 'user@gmail.com', // user's email
+    phone_number: '08102909304', // user's phone number
+    name: 'test user', // user's name
+  },
+  onClose: () => {
+    console.log('Payment modal is closed!!');
+  },
+  callback: (data) => {
+    console.log(`${data.customer.email} just paid me.`)
+  },
+  customizations: {
+    title: 'My store',
+    description: 'Payment for items in cart',
+    logo: 'https://assets.piedpiper.com/logo.png',
+  },
+};
 
 export default function App() {
-  const config: FlutterwaveConfig = {
-    public_key: "FLWPUBK-**************************-X",
-    tx_ref: Date.now().toString(),
-    amount: 100,
-    currency: 'NGN',
-    payment_options: 'card,mobilemoney,ussd',
-    customer: {
-      email: 'user@gmail.com',
-      phone_number: '08102909304',
-      name: 'test user',
-    },
-
-    customizations: {
-      title: 'My store',
-      description: 'Payment for items in cart',
-      logo: 'https://assets.piedpiper.com/logo.png',
-    },
-  };
-  
-
-  const fwConfig: FlutterwaveConfig & InitializeFlutterwavePayment = {
-    ...config,
-    text: 'Pay with Flutterwave btn',
-    callback: (response) => {
-      console.log(response);
-      closePaymentModal()
-    },
-    onClose: () => {
-      console.log("You close me ooo")
-    },
-    
-  };
+  function makeOrders() {
+    const handlePayment = callFlutterwave(config);
+    handlePayment({ callback: config.callback, onClose: config.onClose });
+  }
 
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>
 
-      <FlutterWaveButton {...fwConfig} />
+      <button on:click={makeOrders} >Pay 100 Naira</button>
     </div>
   );
 }

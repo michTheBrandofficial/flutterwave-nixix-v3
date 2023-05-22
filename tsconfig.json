@@ -1,0 +1,9 @@
+{
+  "extends": "./jsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "outDir": "./dist",
+    "typeRoots": ["./src/types.ts"]
+  }
+}

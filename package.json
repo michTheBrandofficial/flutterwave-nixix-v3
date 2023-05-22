@@ -1,14 +1,16 @@
 {
   "name": "flutterwave-nixix-v3",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Nixix Library for payments with Flutterwave",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "type": "module",
   "directories": {
     "example": "example"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "vite"
+    "start": ""
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,7 @@
     "Gateway"
   ],
   "author": "Charles Ikechukwu",
-  "license": "    MIT",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/michTheBrandofficial/flutterwave-nixix-v3/issues"
   },
