@@ -39,8 +39,6 @@ Install the SDK
 ```bash
 $ npm install flutterwave-nixix-v3
 
-# or
-$ yarn add flutterwave-nixix-v3
 
 ```
 
@@ -51,9 +49,12 @@ Add this script to your head element of your index.html: <script defer src="http
 
 Import callFlutterwave to any component in your application and pass your config
 
-```javascript
-import { callFlutterwave } from 'flutterwave-nixix-v3';
-const config = {
+```typescript
+import { callFlutterwave, FlutterWaveTypes } from 'flutterwave-nixix-v3';
+
+interface FlutterWaveConfig extends FlutterWaveTypes.FlutterwaveConfig, FlutterWaveTypes.InitializeFlutterwavePayment {}
+
+const config: FlutterWaveConfig = {
   public_key: 'FLWPUBK_TEST-************************-X',
   tx_ref: Date.now().toString(), //  can be a random lengthy string.
   amount: 100,
@@ -88,9 +89,11 @@ Add Flutterwave to your projects as a nixix api:
 ### Hooks
 
 ```javascript
-import { callFlutterwave, closePaymentModal } from 'flutterwave-nixix-v3';
+import { callFlutterwave, closePaymentModal, FlutterWaveTypes } from 'flutterwave-nixix-v3';
 
-const config = {
+interface FlutterWaveConfig extends FlutterWaveTypes.FlutterwaveConfig, FlutterWaveTypes.InitializeFlutterwavePayment {}
+
+const config: FlutterWaveConfig = {
   public_key: 'FLWPUBK-**************************-X',
   tx_ref: Date.now(),
   amount: 100,
@@ -118,6 +121,7 @@ export default function App() {
   function makeOrders() {
     const handlePayment = callFlutterwave(config);
     handlePayment({ callback: config.callback, onClose: config.onClose });
+    closePaymentModal();
   }
 
   return (
@@ -136,7 +140,7 @@ export default function App() {
 Pass the payment plan ID into your payload to make [recurring payments](https://developer.flutterwave.com/docs/recurring-payments/payment-plans).
 
 ```javascript
-import { callFlutterwave, closePaymentModal } from 'flutterwave-nixix-v3';
+import { callFlutterwave } from 'flutterwave-nixix-v3';
 
 export default function App() {
   const config = {
@@ -159,22 +163,18 @@ export default function App() {
     },
   };
 
-  const handleFlutterPayment = callFlutterwave(config);
+  function makeOrders() {
+    const handlePayment = callFlutterwave(config);
+    handlePayment({ callback: config.callback, onClose: config.onClose });
+    closePaymentModal();
+  }
 
   return (
     <div className="App">
      <h1>Hello Test user</h1>
 
       <button
-        on:click={() => {
-          handleFlutterPayment({
-            callback: (response) => {
-               console.log(response);
-                closePaymentModal() // this will close the modal programmatically
-            },
-            onClose: () => {},
-          });
-        }}
+        on:click={makeOrders}
       >
         Payment with Nixix apis
       </button>
